@@ -1,8 +1,7 @@
 import React from 'react';
-import './Main.css';
-// import cowImg from '{p/cow-eating-concept-illustration.png';
+import './HomeBody.css';
 
-function Main() {
+function HomeBody() {
   return (
     <main className="main">
       <section id="hero" className="hero section">
@@ -34,4 +33,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default HomeBody;

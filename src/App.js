@@ -1,14 +1,9 @@
+// src/App.js
 import React from 'react';
-import Header from './components/Header';
-import Main from './components/Main';
+import AppRouter from './router';
 
-function App() {
-  return (
-    <div className="App">
-      <Header />
-      <Main />
-    </div>
-  );
+const App = () => {
+  return <AppRouter />;
 }
 
 export default App;
