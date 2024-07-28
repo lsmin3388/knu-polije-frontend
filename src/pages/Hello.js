@@ -1,4 +1,3 @@
-// src/pages/Hello.js
 import React from 'react';
 
 const Hello = () => {
