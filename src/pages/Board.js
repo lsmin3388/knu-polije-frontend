@@ -1,14 +1,14 @@
 import React from 'react';
 import Header from '../components/Header/Header';
-import HomeBody from '../components/HomeBody/HomeBody';
+import Dashboard from '../components/Dashboard/Dashboard';
 
-const Home = () => {
+const Board = () => {
     return (
         <div className="App">
             <Header />
-            <HomeBody />
+            <Dashboard />
         </div>
     );
 }
 
-export default Home;
+export default Board;
