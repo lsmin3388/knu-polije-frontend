@@ -2,6 +2,8 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from '../pages/Home';
 import Board from '../pages/Board';
+import Test from '../pages/Test';
+import ProtectedRoute from './ProtectedRoute.js';
 
 const router = createBrowserRouter([
   {
@@ -10,11 +12,15 @@ const router = createBrowserRouter([
   },
   {
     path: '/board',
-    element: <Board />,
+    element: <ProtectedRoute><Board /></ProtectedRoute>,
   },
   {
     path: '/start',
     element: <Home />,
+  },
+  {
+    path: '/test',
+    element: <Test />,
   },
 ]);
 

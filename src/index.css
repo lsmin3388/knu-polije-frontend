@@ -1,3 +1,7 @@
+* {
+  overscroll-behavior-y: none;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -5,7 +9,6 @@ body {
   background-color: #fff;
 }
 
-/* Custom CSS for specific sections */
 .header {
   background-color: #253F83;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

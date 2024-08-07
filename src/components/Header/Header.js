@@ -1,20 +1,22 @@
-import React from 'react';
-import axios from '../../api/axios';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 import * as S from './HeaderStyles';
 
 const Header = () => {
-  const navigate = useNavigate();
+  const user = useContext(UserContext);
+  const [showHomeDropdown, setShowHomeDropdown] = useState(false);
 
-  const handleGetStartedClick = async () => {
-    try {
-      const response = await axios.get('/member');
-      if (response.status === 200) {
-        navigate('/board');
-      } else {
-        window.location.href = '/oauth2/authorization/google';
-      }
-    } catch (error) {
+  const handleMouseEnter = (menu) => {
+    if (menu === 'home') setShowHomeDropdown(true);
+  };
+
+  const handleMouseLeave = (menu) => {
+    if (menu === 'home') setShowHomeDropdown(false);
+  };
+
+  const handleGetStartedClick = () => {
+    if (!user) {
       window.location.href = '/oauth2/authorization/google';
     }
   };
@@ -22,16 +24,30 @@ const Header = () => {
   return (
     <S.Header>
       <S.Contents>
-        <S.Logo href="#home">
-          <S.SiteName>APPNAME</S.SiteName>
+        <S.Logo href="/">
+          <S.SiteName>CW:COWWELL</S.SiteName>
         </S.Logo>
         <S.Navigation>
           <ul>
-            <li><S.NavLink href="/" className="active">Home</S.NavLink></li>
-            <li><S.NavLink href="/about">About</S.NavLink></li>
-            <li><S.NavLink href="/contact">Contact</S.NavLink></li>
+            <li 
+              onMouseEnter={() => handleMouseEnter('home')} 
+              onMouseLeave={() => handleMouseLeave('home')}
+            >
+              <S.NavLink href="/">Home</S.NavLink>
+              {showHomeDropdown && (
+                <S.DropdownMenu>
+                  <S.DropdownItem href="#about">About</S.DropdownItem>
+                  <S.DropdownItem href="#members">Introduction</S.DropdownItem>
+                </S.DropdownMenu>
+              )}
+            </li>
+            <li>
+              <S.NavLink href="/board">Board</S.NavLink>
+            </li>
           </ul>
-          <S.GetStartedButton onClick={handleGetStartedClick}>Get Started</S.GetStartedButton>
+          <S.GetStartedButton onClick={handleGetStartedClick}>
+            {user ? `${user.name} Account` : 'Login'}
+          </S.GetStartedButton>
         </S.Navigation>
       </S.Contents>
     </S.Header>

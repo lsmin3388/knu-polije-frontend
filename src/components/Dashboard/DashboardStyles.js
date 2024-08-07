@@ -7,7 +7,19 @@ export const Container = styled.div`
   height: 100vh;
   font-family: Arial, sans-serif;
   padding: 20px;
-  background-color: #0056b3;
+  background-color: #253F83;
+`;
+
+export const OuterContainer = styled.div`
+  display: flex;
+  background-color: #F3D2F1;
+  padding: 20px;
+  border-radius: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  height: 80%;
+  max-width: 1200px;
+  max-height: 800px;
 `;
 
 export const LeftPanel = styled.div`
@@ -17,8 +29,8 @@ export const LeftPanel = styled.div`
   align-items: center;
   background-color: #ffffff;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  background-color: #f8f9fa;
 `;
 
 export const UploadContainer = styled.div`
@@ -90,12 +102,10 @@ export const ResultPanel = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid #ccc;
   padding: 150px;
   margin-left: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #F3D2F1;
+  border-bottom-right-radius: 30px;
 `;
 
 export const ResultTitle = styled.h2`
@@ -108,4 +118,10 @@ export const ResultImage = styled.img`
   max-width: 100%;
   max-height: 100%;
   border-radius: 10px;
+`;
+
+export const ResultText = styled.p`
+  margin-top: 10px;
+  font-size: 18px;
+  color: #333;
 `;

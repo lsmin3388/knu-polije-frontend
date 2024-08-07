@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const Main = styled.main`
-  padding-top: 80px;
+  padding-top: 30px;
 `;
 
 export const Section = styled.section`
   padding: 60px 0;
-  background: ${props => props.className === 'hero' ? '#253F83' : '#fff'};
+  background: ${props => props.className === 'hero' ? '#253F83' : props.className === 'members' ? '#F4F4F4' : '#FFF'};
 `;
 
 export const Container = styled.div`
@@ -24,16 +24,39 @@ export const Row = styled.div`
 export const ColLeft = styled.div`
   flex: 1;
   padding: 20px;
+  p {
+    font-weight: bold;
+    color: #AEC4FD;
+  }
 `;
 
+
 export const ColRight = styled.div`
+  flex: 0.6;
+  padding: 20px;
+`;
+
+export const Col = styled.div`
   flex: 1;
   padding: 20px;
+  text-align: center;
+  max-width: 25%;
 `;
 
 export const HeroImg = styled.img`
   width: 100%;
   border-radius: 10px;
+`;
+
+export const PersonImg = styled.img`
+  width: 100%;
+  border-radius: 50%;
+  max-width: 150px;
+`;
+
+export const Name = styled.p`
+  font-weight: bold;
+  margin: 10px 0 5px 0;
 `;
 
 export const Buttons = styled.div`
@@ -47,4 +70,25 @@ export const GetStartedButton = styled.a`
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
+`;
+
+export const Footer = styled.footer`
+  background: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+`;
+
+export const FooterLinks = styled.div`
+  margin-top: 10px;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
