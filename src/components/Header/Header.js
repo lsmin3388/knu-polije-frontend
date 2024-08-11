@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import * as S from './HeaderStyles';
 
@@ -20,7 +19,7 @@ const Header = () => {
       window.location.href = '/oauth2/authorization/google';
     }
   };
-
+  
   return (
     <S.Header>
       <S.Contents>

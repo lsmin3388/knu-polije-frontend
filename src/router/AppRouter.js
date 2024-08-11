@@ -1,22 +1,18 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from '../pages/Home';
-import Board from '../pages/Board';
 import Test from '../pages/Test';
 import ProtectedRoute from './ProtectedRoute.js';
+import HomeBody from '../components/HomeBody/HomeBody.js';
+import Dashboard from '../components/Dashboard/Dashboard.js';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />,
+    element: <HomeBody />,
   },
   {
     path: '/board',
-    element: <ProtectedRoute><Board /></ProtectedRoute>,
-  },
-  {
-    path: '/start',
-    element: <Home />,
+    element: <ProtectedRoute><Dashboard /></ProtectedRoute>,
   },
   {
     path: '/test',

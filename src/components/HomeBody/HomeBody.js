@@ -23,7 +23,7 @@ const membersKNU = [
   { name: 'Dongkyu Lee', role: 'Project Leader', image: people5 },
   { name: 'Sangmin Lee', role: 'Technical Leader', image: people6 },
   { name: 'Minseo Choi', role: 'Media Leader', image: people7 },
-  { name: 'Hyejin', role: 'Knowledge Leader', image: people8 },
+  { name: 'Hyejin Lee', role: 'Knowledge Leader', image: people8 },
 ];
 
 const HomeBody = () => {
@@ -109,17 +109,6 @@ const HomeBody = () => {
           </S.Row>
         </S.Container>
       </S.Section>
-
-      <S.Footer>
-        <S.Container>
-          <p>© 2024 APPNAME. All rights reserved.</p>
-          <S.FooterLinks>
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#terms">Terms of Service</a>
-            <a href="#members">Contact Us</a>
-          </S.FooterLinks>
-        </S.Container>
-      </S.Footer>
     </S.Main>
   );
 }

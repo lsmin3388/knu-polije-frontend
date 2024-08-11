@@ -71,24 +71,3 @@ export const GetStartedButton = styled.a`
   text-decoration: none;
   border-radius: 5px;
 `;
-
-export const Footer = styled.footer`
-  background: #333;
-  color: #fff;
-  padding: 20px 0;
-  text-align: center;
-`;
-
-export const FooterLinks = styled.div`
-  margin-top: 10px;
-
-  a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 10px;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
