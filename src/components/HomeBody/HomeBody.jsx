@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as S from './HomeBodyStyles';
+import * as S from './HomeBody.styled';
 import cowImage from '../../assets/images/cow.png';
 import people1 from '../../assets/images/people1.png';
 import people2 from '../../assets/images/people2.png';

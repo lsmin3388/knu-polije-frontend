@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import AppRouter from './router/AppRouter';
 import { UserContext } from './context/UserContext';
-import * as S from './AppStyles';
+import * as S from './App.styled';
 import Header from './components/Header/Header';
 
 const App = () => {

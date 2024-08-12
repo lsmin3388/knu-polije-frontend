@@ -1,8 +1,8 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ProtectedRoute from './ProtectedRoute.js';
-import HomeBody from '../components/HomeBody/HomeBody.js';
-import Dashboard from '../components/Dashboard/Dashboard.js';
+import ProtectedRoute from './ProtectedRoute';
+import HomeBody from '../components/HomeBody/HomeBody';
+import Dashboard from '../components/Dashboard/Dashboard';
 
 const router = createBrowserRouter([
   {

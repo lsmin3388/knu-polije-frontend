@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import Webcam from 'react-webcam';
 import { handleImageChange, handleDetect } from '../../utils/imageHandlers';
 import ToggleButton from '../ToggleButton/ToggleButton';
-import * as S from './DashboardStyles';
+import * as S from './Dashboard.styled';
 import CameraIcon from '../../assets/camera.svg';
 import ResultCowIcon from '../../assets/result_cow.svg';
 import ResultTextCowIcon from '../../assets/result_text_cow.svg';
@@ -13,58 +13,55 @@ const Dashboard = () => {
   const [resultText, setResultText] = useState('');
   const [mode, setMode] = useState('Photo');
   const [webcamActive, setWebcamActive] = useState(false);
-  const webcamRef = React.useRef(null);
+  const [useTestMode, setUseTestMode] = useState(false);
+  const webcamRef = useRef(null);
 
-  const capture = React.useCallback(() => {
+  const capture = useCallback(() => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
       if (imageSrc) {
         setSelectedImage(imageSrc);
         return imageSrc;
-      } else {
-        console.error("Failed to capture screenshot from webcam.");
-        return null;
       }
+      console.error("Failed to capture screenshot from webcam.");
     } else {
       console.error("Webcam is not available or not yet initialized.");
-      return null;
     }
-  }, [webcamRef, setSelectedImage]);
+    return null;
+  }, []);
 
-  const handleWebcamToggle = () => {
-    setWebcamActive((prev) => !prev);
-  };
+  const handleWebcamToggle = () => setWebcamActive(prev => !prev);
 
   const handleDetectWithCapture = async (type) => {
-    let imageToDetect = selectedImage;
-
-    if (mode === 'Real-Time' && webcamActive) {
-      imageToDetect = capture();
-    }
-
-    if (imageToDetect) {
-      try {
-        await handleDetect(type, imageToDetect, setResultImage, setResultText);
-      } catch (error) {
-        console.error("Error during detection:", error);
-        setResultText("An error occurred during detection. Please try again.");
-      }
-    } else {
+    const imageToDetect = (mode === 'Real-Time' && webcamActive) ? capture() : selectedImage;
+    if (!imageToDetect) {
       console.error("Failed to capture image from webcam.");
       setResultText("Error capturing image from webcam. Please try again.");
+      return;
+    }
+
+    try {
+      if (type === 'weight' && useTestMode) {
+        await handleDetect('miniature_weight', imageToDetect, setResultImage, setResultText);
+      } else {
+        await handleDetect(type, imageToDetect, setResultImage, setResultText);
+      }
+    } catch (error) {
+      console.error("Error during detection:", error);
+      setResultText("An error occurred during detection. Please try again.");
     }
   };
 
   const handleImageClick = () => {
     setSelectedImage(null);
-    if (mode === 'Real-Time') {
-      setWebcamActive(true);
-    }
+    if (mode === 'Real-Time') setWebcamActive(true);
   };
 
   const resetResult = () => {
+    setSelectedImage(null);
     setResultImage(null);
     setResultText('');
+    setWebcamActive(false);
   };
 
   const isError = resultText.includes('Unable to detect');
@@ -110,6 +107,15 @@ const Dashboard = () => {
               Weight
             </S.Button>
           </S.ButtonsContainer>
+          <S.CheckboxContainer>
+            <input 
+              type="checkbox" 
+              id="testMode" 
+              checked={useTestMode} 
+              onChange={() => setUseTestMode(prev => !prev)} 
+            />
+            <label htmlFor="testMode">Use Test Mode</label>
+          </S.CheckboxContainer>
         </S.LeftPanel>
         <S.RightPanel resultExists={!!resultImage || !!resultText}>
           {isError ? (
@@ -132,10 +138,10 @@ const Dashboard = () => {
               )}
               {resultText && (
                 <S.ResultWrapperPanel>
-                  <S.ResultTextPannel>
+                  <S.ResultTextPanel>
                     <S.ResultTextIcon src={ResultTextCowIcon} alt="Result Text Icon" />
                     <S.ResultTextWrapper><S.ResultText>{resultText}</S.ResultText></S.ResultTextWrapper>
-                  </S.ResultTextPannel>
+                  </S.ResultTextPanel>
                   <S.ResetButton onClick={resetResult}>Reset</S.ResetButton>
                 </S.ResultWrapperPanel>
               )}
@@ -146,4 +152,5 @@ const Dashboard = () => {
     </S.Container>
   );
 };
+
 export default Dashboard;

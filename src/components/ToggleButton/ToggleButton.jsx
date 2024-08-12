@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from './ToggleButtonStyles';
+import * as S from './ToggleButton.styled';
 
 const ToggleButton = ({ mode, setMode, setSelectedImage, setWebcamActive }) => {
   const handleToggle = () => {

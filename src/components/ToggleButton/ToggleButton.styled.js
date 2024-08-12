@@ -4,6 +4,16 @@ export const ToggleContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  width: 100%;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    margin-bottom: 15px;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 10px;
+  }
 `;
 
 export const ToggleSwitch = styled.label`
@@ -11,6 +21,16 @@ export const ToggleSwitch = styled.label`
   display: inline-block;
   width: 180px;
   height: 60px;
+
+  @media (max-width: 768px) {
+    width: 140px;
+    height: 50px;
+  }
+
+  @media (max-width: 480px) {
+    width: 120px;
+    height: 40px;
+  }
 `;
 
 export const ToggleInput = styled.input`
@@ -43,6 +63,18 @@ export const ToggleSlider = styled.span`
   justify-content: ${({ mode }) => (mode === 'Photo' ? 'start' : 'end')};
   align-items: center;
   font-weight: bold;
+  font-size: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    padding-right: 15px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding-right: 10px;
+  }
+
   &:before {
     position: absolute;
     content: 'Real Time';
@@ -58,5 +90,20 @@ export const ToggleSlider = styled.span`
     align-items: center;
     font-weight: bold;
     transform: ${({ mode }) => (mode === 'Photo' ? 'translateX(88px)' : 'translateX(-88px)')};
+
+    @media (max-width: 768px) {
+      height: 40px;
+      width: 60px;
+      font-size: 0.9rem;
+      text-align: center;
+      transform: ${({ mode }) => (mode === 'Photo' ? 'translateX(68px)' : 'translateX(-68px)')};
+    }
+
+    @media (max-width: 480px) {
+      height: 30px;
+      width: 50px;
+      font-size: 0.8rem;
+      transform: ${({ mode }) => (mode === 'Photo' ? 'translateX(60px)' : 'translateX(-60px)')};
+    }
   }
 `;
