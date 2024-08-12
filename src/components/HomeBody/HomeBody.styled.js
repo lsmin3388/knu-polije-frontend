@@ -49,9 +49,11 @@ export const HeroImg = styled.img`
 `;
 
 export const PersonImg = styled.img`
-  width: 100%;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  max-width: 150px;
+  object-fit: cover;
+  margin: 0 auto;
 `;
 
 export const Name = styled.p`

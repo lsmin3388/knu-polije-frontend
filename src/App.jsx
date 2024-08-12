@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import AppRouter from './router/AppRouter';
 import { UserContext } from './context/UserContext';
-import * as S from './App.styled';
+import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 
 const App = () => {
@@ -28,16 +28,7 @@ const App = () => {
 
       <AppRouter />
       
-      <S.Footer>
-        <S.Container>
-          <p>© 2024 APPNAME. All rights reserved.</p>
-          <S.FooterLinks>
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#terms">Terms of Service</a>
-            <a href="#members">Contact Us</a>
-          </S.FooterLinks>
-        </S.Container>
-      </S.Footer>
+      <Footer />
     </UserContext.Provider>
   );
 }
