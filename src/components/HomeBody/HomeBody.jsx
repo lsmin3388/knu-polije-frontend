@@ -2,28 +2,33 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './HomeBody.styled';
 import cowImage from '../../assets/images/cow.png';
-import people1 from '../../assets/images/pram.jpeg';
-import people2 from '../../assets/images/akbar.jpeg';
-import people3 from '../../assets/images/davin.jpeg';
-import people4 from '../../assets/images/alinee.jpeg';
-import people5 from '../../assets/images/dongkyu.png';
-import people6 from '../../assets/images/sangmin.jpeg';
-import people7 from '../../assets/images/people7.png';
-import people8 from '../../assets/images/people8.png';
+import lecturer from '../../assets/images/wahyu.jpeg';
+import pram from '../../assets/images/pram.jpeg';
+import akbar from '../../assets/images/akbar.jpeg';
+import davin from '../../assets/images/davin.jpeg';
+import alinee from '../../assets/images/alinee.jpeg';
+import dongkyu from '../../assets/images/dongkyu.png';
+import sangmin from '../../assets/images/sangmin.jpeg';
+import minseo from '../../assets/images/minseo.png';
+import hyejin from '../../assets/images/hyejin.png';
 import { Link } from 'react-scroll';
 
+const membersLecturers = [
+  { name: 'Wahyu Pebrianto, S.Tr.Kom., M.T.', role: 'Project Advisor', image: lecturer },
+];
+
 const membersPolije = [
-  { name: 'Pramudya Putra Pratama', role: 'Project Leader', image: people1 },
-  { name: 'Muhammad Akbar Aldiansyah', role: 'Technical Leader', image: people2 },
-  { name: 'Davin Aristo Widya Pernama', role: 'Media Leader', image: people3 },
-  { name: 'Salsabila Juliawardhani Jadid', role: 'Knowledge Leader', image: people4 },
+  { name: 'Pramudya Putra Pratama', role: 'Project Leader', image: pram },
+  { name: 'Muhammad Akbar Aldiansyah', role: 'Technical Leader', image: akbar },
+  { name: 'Davin Aristo Widya Pernama', role: 'Media Leader', image: davin },
+  { name: 'Salsabila Juliawardhani Jadid', role: 'Knowledge Leader', image: alinee },
 ];
 
 const membersKNU = [
-  { name: 'Dongkyu Lee', role: 'Project Leader', image: people5 },
-  { name: 'Sangmin Lee', role: 'Technical Leader', image: people6 },
-  { name: 'Minseo Choi', role: 'Media Leader', image: people7 },
-  { name: 'Hyejin Lee', role: 'Knowledge Leader', image: people8 },
+  { name: 'Dongkyu Lee', role: 'Project Leader', image: dongkyu },
+  { name: 'Sangmin Lee', role: 'Technical Leader', image: sangmin },
+  { name: 'Minseo Choi', role: 'Media Leader', image: minseo },
+  { name: 'Hyejin Lee', role: 'Knowledge Leader', image: hyejin },
 ];
 
 const HomeBody = () => {
@@ -86,10 +91,20 @@ const HomeBody = () => {
 
       <S.Section id="members" className="members">
         <S.Container>
-          <h2>Member Introduction</h2>
-          <h3>POLIJE UNIVERSITY STUDENTS</h3>
+        <h2>Member Introduction</h2>
+          <h3>Lecturer</h3>
           <S.Row>
-            {membersPolije.map((member, index) => (
+            {membersLecturers.map((member, index) => (
+              <S.ColLecturer key={index}>
+                <S.PersonImg src={member.image} alt={member.name} />
+                <S.Name>{member.name}</S.Name>
+                <p>{member.role}</p>
+              </S.ColLecturer>
+            ))}
+          </S.Row>
+          <h3>KYUNGPOOK NATIONAL UNIVERSITY STUDENTS</h3>
+          <S.Row>
+            {membersKNU.map((member, index) => (
               <S.Col key={index}>
                 <S.PersonImg src={member.image} alt={member.name} />
                 <S.Name>{member.name}</S.Name>
@@ -97,9 +112,9 @@ const HomeBody = () => {
               </S.Col>
             ))}
           </S.Row>
-          <h3>KYUNGPOOK NATIONAL UNIVERSITY STUDENTS</h3>
+          <h3>POLIJE UNIVERSITY STUDENTS</h3>
           <S.Row>
-            {membersKNU.map((member, index) => (
+            {membersPolije.map((member, index) => (
               <S.Col key={index}>
                 <S.PersonImg src={member.image} alt={member.name} />
                 <S.Name>{member.name}</S.Name>

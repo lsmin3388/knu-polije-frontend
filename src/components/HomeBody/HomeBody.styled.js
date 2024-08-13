@@ -30,7 +30,6 @@ export const ColLeft = styled.div`
   }
 `;
 
-
 export const ColRight = styled.div`
   flex: 0.6;
   padding: 20px;
@@ -41,6 +40,14 @@ export const Col = styled.div`
   padding: 20px;
   text-align: center;
   max-width: 25%;
+`;
+
+export const ColLecturer = styled(Col)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 `;
 
 export const HeroImg = styled.img`

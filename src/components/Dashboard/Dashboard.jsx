@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useEffect, memo } from 'react';
 import Webcam from 'react-webcam';
 import { handleImageChange, handleDetect } from '../../utils/imageHandlers';
 import ToggleButton from '../ToggleButton/ToggleButton';
@@ -6,6 +6,40 @@ import * as S from './Dashboard.styled';
 import CameraIcon from '../../assets/camera.svg';
 import ResultCowIcon from '../../assets/result_cow.svg';
 import ResultTextCowIcon from '../../assets/result_text_cow.svg';
+
+const ResultPanel = memo(({ resultImage, resultText, isError, resetResult }) => (
+  <S.RightPanel resultExists={!!resultImage || !!resultText}>
+    {isError ? (
+      <S.ResultTextMessage isError={isError}>
+        {resultText}
+      </S.ResultTextMessage>
+    ) : !resultImage && !resultText ? (
+      <>
+        <S.ResultIcon src={ResultCowIcon} alt="Result Icon" />
+        <S.ResultTextMessage>
+          If you want to see result, add materials first!
+        </S.ResultTextMessage>
+      </>
+    ) : (
+      <>
+        {resultImage && (
+          <S.ResultImagePanel>
+            <S.ResultImage src={resultImage} alt="Result" />
+          </S.ResultImagePanel>
+        )}
+        {resultText && (
+          <S.ResultWrapperPanel>
+            <S.ResultTextPanel>
+              <S.ResultTextIcon src={ResultTextCowIcon} alt="Result Text Icon" />
+              <S.ResultTextWrapper><S.ResultText>{resultText}</S.ResultText></S.ResultTextWrapper>
+            </S.ResultTextPanel>
+            <S.ResetButton onClick={resetResult}>Reset</S.ResetButton>
+          </S.ResultWrapperPanel>
+        )}
+      </>
+    )}
+  </S.RightPanel>
+));
 
 const Dashboard = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -15,6 +49,16 @@ const Dashboard = () => {
   const [webcamActive, setWebcamActive] = useState(false);
   const [useTestMode, setUseTestMode] = useState(false);
   const webcamRef = useRef(null);
+
+  // 컴포넌트가 처음 마운트될 때 상태 초기화
+  useEffect(() => {
+    setSelectedImage(null);
+    setResultImage(null);
+    setResultText('');
+    setMode('Photo');
+    setWebcamActive(false);
+    setUseTestMode(false);
+  }, []);
 
   const capture = useCallback(() => {
     if (webcamRef.current) {
@@ -30,9 +74,11 @@ const Dashboard = () => {
     return null;
   }, []);
 
-  const handleWebcamToggle = () => setWebcamActive(prev => !prev);
+  const handleWebcamToggle = useCallback(() => {
+    setWebcamActive(prev => !prev);
+  }, []);
 
-  const handleDetectWithCapture = async (type) => {
+  const handleDetectWithCapture = useCallback(async (type) => {
     const imageToDetect = (mode === 'Real-Time' && webcamActive) ? capture() : selectedImage;
     if (!imageToDetect) {
       console.error("Failed to capture image from webcam.");
@@ -50,19 +96,19 @@ const Dashboard = () => {
       console.error("Error during detection:", error);
       setResultText("An error occurred during detection. Please try again.");
     }
-  };
+  }, [mode, webcamActive, selectedImage, useTestMode, capture]);
 
-  const handleImageClick = () => {
+  const handleImageClick = useCallback(() => {
     setSelectedImage(null);
     if (mode === 'Real-Time') setWebcamActive(true);
-  };
+  }, [mode]);
 
-  const resetResult = () => {
+  const resetResult = useCallback(() => {
     setSelectedImage(null);
     setResultImage(null);
     setResultText('');
     setWebcamActive(false);
-  };
+  }, []);
 
   const isError = resultText.includes('Unable to detect');
 
@@ -117,37 +163,12 @@ const Dashboard = () => {
             <label htmlFor="testMode">Use Test Mode</label>
           </S.CheckboxContainer>
         </S.LeftPanel>
-        <S.RightPanel resultExists={!!resultImage || !!resultText}>
-          {isError ? (
-            <S.ResultTextMessage isError={isError}>
-              {resultText}
-            </S.ResultTextMessage>
-          ) : !resultImage && !resultText ? (
-            <>
-              <S.ResultIcon src={ResultCowIcon} alt="Result Icon" />
-              <S.ResultTextMessage>
-                If you want to see result, add materials first!
-              </S.ResultTextMessage>
-            </>
-          ) : (
-            <>
-              {resultImage && (
-                <S.ResultImagePanel>
-                  <S.ResultImage src={resultImage} alt="Result" />
-                </S.ResultImagePanel>
-              )}
-              {resultText && (
-                <S.ResultWrapperPanel>
-                  <S.ResultTextPanel>
-                    <S.ResultTextIcon src={ResultTextCowIcon} alt="Result Text Icon" />
-                    <S.ResultTextWrapper><S.ResultText>{resultText}</S.ResultText></S.ResultTextWrapper>
-                  </S.ResultTextPanel>
-                  <S.ResetButton onClick={resetResult}>Reset</S.ResetButton>
-                </S.ResultWrapperPanel>
-              )}
-            </>
-          )}
-        </S.RightPanel>
+        <ResultPanel 
+          resultImage={resultImage} 
+          resultText={resultText} 
+          isError={isError} 
+          resetResult={resetResult} 
+        />
       </S.OuterContainer>
     </S.Container>
   );
