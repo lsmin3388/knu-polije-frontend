@@ -1,0 +1,12 @@
+services:
+    kp-web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: kp-web
+        environment:
+            NODE_ENV: production
+            PORT: 
+        ports:
+            - "49271:49271"
+        restart: always
