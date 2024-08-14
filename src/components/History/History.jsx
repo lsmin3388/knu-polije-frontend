@@ -5,7 +5,6 @@ import dayjs from 'dayjs';
 import empty from '../../assets/images/empty.png';
 
 const History = () => {
-  const [historyData, setHistoryData] = useState([]);
   const [groupedData, setGroupedData] = useState({});
   const [selectedImage, setSelectedImage] = useState(null);
   const [error, setError] = useState(null);
@@ -18,7 +17,6 @@ const History = () => {
           setError('History is empty!');
           return;
         }
-        setHistoryData(data);
         groupByDate(data);
       } catch (error) {
         console.error('Failed to fetch history data:', error);
@@ -59,17 +57,20 @@ const History = () => {
             <div key={date}>
               <S.DateHeader>{date}</S.DateHeader>
               <S.Gallery>
-                {groupedData[date].map((item) => {
-                  const imageUrl = `/api/v1/storage/images/${item.outputFileName}`;
-                  return (
-                    <S.ImageThumbnail
-                      key={item.id}
-                      src={imageUrl}
-                      alt={item.inputFileName}
-                      onClick={() => handleImageClick(item.outputFileName)}
-                    />
-                  );
-                })}
+                {groupedData[date]
+                  .slice()  // slice()로 원본 배열을 복사합니다.
+                  .reverse()  // 배열을 역순으로 정렬합니다.
+                  .map((item) => {
+                    const imageUrl = `/api/v1/storage/images/${item.outputFileName}`;
+                    return (
+                      <S.ImageThumbnail
+                        key={item.id}
+                        src={imageUrl}
+                        alt={item.inputFileName}
+                        onClick={() => handleImageClick(item.outputFileName)}
+                      />
+                    );
+                  })}
               </S.Gallery>
             </div>
           ))

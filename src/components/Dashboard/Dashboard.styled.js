@@ -231,7 +231,7 @@ export const ResultImagePanel = styled.div`
   }
 
   @media (max-width: 768px) {
-    height: auto;
+    height: 90%;
     width: 100%;
   }
 `;
@@ -257,12 +257,12 @@ export const ResultWrapperPanel = styled.div`
   height: 90%;
 
   @media (max-width: 1200px) {
-    height: 80%;
+    height: 100%;
   }
 
   @media (max-width: 768px) {
     width: 100%;
-    height: auto;
+    height: 100%;;
     margin-top: 20px;
   }
 `;
@@ -272,48 +272,51 @@ export const ResultTextPanel = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   background-color: #FAEDF9;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 15px 0;
   width: 80%;
   height: 100%;
-  position: relative;
 
   @media (max-width: 768px) {
     width: 100%;
+    height: 100%;
     padding: 10px 0;
   }
 `;
 
 export const ResultTextIcon = styled.img`
   width: 100px;
-  margin-bottom: 10px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  margin: 70px 0px;
 
   @media (max-width: 768px) {
     width: 80px;
+    margin: 30px 0px;
   }
 `;
 
 export const ResultTextWrapper = styled.div`
-  background-color: #FFF;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 80%;
-  height: 30%;
+  flex: 1;
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
   align-items: center;
   justify-content: center;
-  margin-top: auto;
+
+  background-color: #FFF;
+  padding: 10px;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  height: 40%;
+  display: flex;
+  margin-top: 10px;
 
   @media (max-width: 768px) {
     width: 100%;
-    height: auto;
   }
 `;
 
@@ -326,6 +329,11 @@ export const ResultIcon = styled.img`
     width: 200px;
     margin: 20px;
   }
+`;
+
+export const ResultIcon2 = styled.img`
+  width: 40px;
+  height: auto;
 `;
 
 export const ResultTextMessage = styled.p`
@@ -341,20 +349,22 @@ export const ResultTextMessage = styled.p`
 `;
 
 export const ResultText = styled.p`
-  font-size: 18px;
+  font-size: 30px;
   color: #333;
   text-align: center;
+  font-weight: bold;
 `;
 
 export const ResetButton = styled.button`
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 20px 20px;
+  font-size: 23px;
+  font-weight: bold;
   width: 80%;
   cursor: pointer;
   background-color: #E9E6E9;
   color: #6B6B6B;
   border: none;
-  border-radius: 10px;
+  border-radius: 55px;
   margin-top: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 

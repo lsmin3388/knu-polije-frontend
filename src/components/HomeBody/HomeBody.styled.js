@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Main = styled.main`
   padding-top: 30px;
@@ -44,6 +44,10 @@ export const ColLeft = styled.div`
 export const ColRight = styled.div`
   flex: 0.6;
   padding: 20px;
+
+  @media (max-width: 768px) {
+    display: none; /* Hide HeroImg on mobile screens */
+  }
 `;
 
 export const Col = styled.div`
@@ -61,9 +65,33 @@ export const ColLecturer = styled(Col)`
   text-align: center;
 `;
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
+
+const float = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
 export const HeroImg = styled.img`
   width: 100%;
   border-radius: 10px;
+  animation: ${fadeIn} 1.5s ease-out, ${float} 3s ease-in-out infinite; /* fadeIn 후에 float 애니메이션이 반복됨 */
 `;
 
 export const PersonImg = styled.img`
@@ -88,14 +116,6 @@ export const Buttons = styled.div`
   display: flex;
   gap: 10px;
 `;
-
-// export const GetStartedButton = styled.a`
-//   padding: 10px 20px;
-//   background: #007bff;
-//   color: #fff;
-//   text-decoration: none;
-//   border-radius: 5px;
-// `;
 
 export const GetStartedButton = styled.a`
   padding: 12px 24px;
@@ -136,16 +156,20 @@ export const CircleText = styled.h2`
   margin: -60px auto 30px;
   padding: 20px;
   text-align: center;
-  z-index: 1; /* Ensure CircleText stays below the LogoImage */
+  z-index: 1;
 `;
 
 export const LogoImage = styled.img`
   width: 40%;
   border-radius: 10px;
-  margin-top: -120px; /* Adjust the margin to position the LogoImage above the CircleText */
-  align-self: center; /* Ensure the image is centered horizontally */
-  z-index: 2; /* Ensure LogoImage stays above the CircleText */
+  margin-top: -120px;
+  align-self: center;
+  z-index: 2;
   position: relative;
+
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 `;
 
 export const AboutRow = styled.div`
@@ -155,12 +179,23 @@ export const AboutRow = styled.div`
   justify-content: ${({ center }) => (center ? 'center' : 'space-between')};
   flex-direction: ${({ reverse }) => (reverse ? 'row-reverse' : 'row')};
   margin: 70px 0px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 export const AboutImage1 = styled.img`
   width: 25%;
   border-radius: 10px;
   margin-left: 5%;
+
+  @media (max-width: 768px) {
+    width: 70%;
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
 `;
 
 export const AboutText1 = styled.div`
@@ -175,12 +210,24 @@ export const AboutText1 = styled.div`
     font-size: 16px;
     line-height: 1.5;
   }
+
+  @media (max-width: 768px) {
+    width: 90%;
+    margin-right: 0;
+    text-align: center;
+  }
 `;
 
 export const AboutImage2 = styled.img`
   width: 25%;
   border-radius: 10px;
   margin-right: 5%;
+
+  @media (max-width: 768px) {
+    width: 70%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 `;
 
 export const AboutText2 = styled.div`
@@ -195,12 +242,22 @@ export const AboutText2 = styled.div`
     font-size: 16px;
     line-height: 1.5;
   }
+
+  @media (max-width: 768px) {
+    width: 90%;
+    margin-left: 0;
+    text-align: center;
+  }
 `;
 
 export const AboutImage3 = styled.img`
   width: 70%;
   margin-top: 100px;
   border-radius: 10px;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 export const AboutText3 = styled.div`
@@ -213,6 +270,11 @@ export const AboutText3 = styled.div`
   p {
     font-size: 16px;
     line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    width: 90%;
+    text-align: center;
   }
 `;
 

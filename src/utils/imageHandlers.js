@@ -32,15 +32,15 @@ export const handleDetect = async (type, selectedImage, setResultImage, setResul
     console.log('Response:', data);
 
     if (data.status !== 200 || !data.response) {
-      throw new Error('Invalid response from server');
+      throw new Error('[ERROR] Invalid response from server');
     }
 
     if (type === 'breed' && !data.response.result.results[0]?.label) {
-      throw new Error('Unable to detect cow breed');
+      throw new Error('[ERROR] Unable to detect cow breed');
     }
 
     if (type === 'weight' && (data.response.result.total_weight === 0 || !data.response.result.total_weight)) {
-      throw new Error('Unable to detect cow weight');
+      throw new Error('[ERROR] Unable to detect cow weight');
     }
 
     const imageUrl = `/api/v1/storage/images/${data.response.outputImgName}`;
@@ -48,11 +48,13 @@ export const handleDetect = async (type, selectedImage, setResultImage, setResul
     setResultImage(imageUrl);
 
     if (type === 'breed') {
-      setResultText(`Breed: ${data.response.result.results[0].label}`);
+      // setResultText(`BREED: ${data.response.result.results[0].label}`);
+      setResultText(`${data.response.result.results[0].label}`);
     } else if (type === 'weight' || type === 'miniature_weight') {
       const roundedWeight = Math.round(data.response.result.total_weight);
-      const unit = useTestMode ? 'g' : 'kg';
-      setResultText(`Total Weight: ${roundedWeight} ${unit}`);
+      const unit = useTestMode ? 'G' : 'KG';
+      // setResultText(`WEIGHT: ${roundedWeight} ${unit}`);
+      setResultText(`${roundedWeight} ${unit}`);
     }
   } catch (error) {
     console.error('Error detecting image:', error);

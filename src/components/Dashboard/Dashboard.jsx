@@ -6,8 +6,11 @@ import * as S from './Dashboard.styled';
 import CameraIcon from '../../assets/camera.svg';
 import ResultCowIcon from '../../assets/result_cow.svg';
 import ResultTextCowIcon from '../../assets/result_text_cow.svg';
+import WeightIcon from '../../assets/weight_icon.svg';
+import BreedIcon from '../../assets/breed_icon.svg';
 
-const ResultPanel = memo(({ resultImage, resultText, isError, resetResult }) => (
+
+const ResultPanel = memo(({ resultImage, resultText, isError, resetResult, resultType }) => (
   <S.RightPanel resultExists={!!resultImage || !!resultText || isError}>
     {isError ? (
       <S.ResultTextMessage isError={isError}>
@@ -31,7 +34,11 @@ const ResultPanel = memo(({ resultImage, resultText, isError, resetResult }) => 
           <S.ResultWrapperPanel>
             <S.ResultTextPanel>
               <S.ResultTextIcon src={ResultTextCowIcon} alt="Result Text Icon" />
-              <S.ResultTextWrapper><S.ResultText>{resultText}</S.ResultText></S.ResultTextWrapper>
+              <S.ResultTextWrapper>
+                {resultType === 'weight' && <S.ResultIcon2 src={WeightIcon} alt="Weight Icon" />}
+                {resultType === 'breed' && <S.ResultIcon2 src={BreedIcon} alt="Breed Icon" />}
+                <S.ResultText>{resultText}</S.ResultText>
+              </S.ResultTextWrapper>
             </S.ResultTextPanel>
             <S.ResetButton onClick={resetResult}>Reset</S.ResetButton>
           </S.ResultWrapperPanel>
@@ -48,6 +55,7 @@ const Dashboard = () => {
   const [mode, setMode] = useState('Photo');
   const [webcamActive, setWebcamActive] = useState(false);
   const [useTestMode, setUseTestMode] = useState(false);
+  const [resultType, setResultType] = useState('');
   const webcamRef = useRef(null);
 
   // 컴포넌트가 처음 마운트될 때 상태 초기화
@@ -55,6 +63,7 @@ const Dashboard = () => {
     setSelectedImage(null);
     setResultImage(null);
     setResultText('');
+    setResultType('');
     setMode('Photo');
     setWebcamActive(false);
     setUseTestMode(false);
@@ -89,8 +98,10 @@ const Dashboard = () => {
     try {
       if (type === 'weight' && useTestMode) {
         await handleDetect('miniature_weight', imageToDetect, setResultImage, setResultText, useTestMode);
+        setResultType('weight');
       } else {
         await handleDetect(type, imageToDetect, setResultImage, setResultText, useTestMode);
+        setResultType(type); // 'weight' 또는 'breed'가 설정됨
       }
     } catch (error) {
       console.error("Error during detection:", error);
@@ -107,10 +118,11 @@ const Dashboard = () => {
     setSelectedImage(null);
     setResultImage(null);
     setResultText('');
+    setResultType(''); // 초기화
     setWebcamActive(false);
   }, []);
 
-  const isError = resultText.includes('Unable to detect');
+  const isError = resultText.includes('[ERROR]');
 
   return (
     <S.Container>
@@ -168,6 +180,7 @@ const Dashboard = () => {
           resultText={resultText} 
           isError={isError} 
           resetResult={resetResult} 
+          resultType={resultType}
         />
       </S.OuterContainer>
     </S.Container>

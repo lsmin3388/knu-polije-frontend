@@ -32,7 +32,7 @@ const Header = () => {
         <S.Logo href="/">
           <S.SiteNameContainer>
             <S.Icon src={cowTitleIcon} alt="Cow Title Icon" />
-            <S.SiteName>COWWELL</S.SiteName>
+            <S.SiteName>COWELL</S.SiteName>
           </S.SiteNameContainer>
         </S.Logo>
         <S.Navigation>
