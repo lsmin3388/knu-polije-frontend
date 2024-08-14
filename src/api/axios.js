@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://kpcowell/api/v1',
-  timeout: 10000,
+  baseURL: 'https://kpcowell/api/v1',
+  timeout: 20000,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
