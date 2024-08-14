@@ -11,7 +11,7 @@ const App = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get('/api/v1/member');
+        const response = await axios.get('/member');
         if (response.status === 200) {
           setUser(response.data.response);
         }
