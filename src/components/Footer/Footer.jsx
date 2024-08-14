@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <S.Footer>
             <S.Container>
-                <p>© 2024 APPNAME. All rights reserved.</p>
+                <p>© 2024 COWWELL. All rights reserved.</p>
                 <S.FooterLinks>
                     <a href="#privacy">Privacy Policy</a>
                     <a href="#terms">Terms of Service</a>

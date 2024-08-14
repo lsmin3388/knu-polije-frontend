@@ -1,4 +1,3 @@
-// ProtectedRoute.js
 import React, { useEffect, useState } from 'react';
 import axios from '../api/axios';
 import { useNavigate } from 'react-router-dom';

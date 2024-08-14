@@ -7,7 +7,7 @@ export const Header = styled.header`
   top: 0;
   width: 100%;
   height: 70px;
-  background-color: #253F83;
+  background-color: #1F387A;
   box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
@@ -20,6 +20,27 @@ export const Header = styled.header`
 
   @media (max-width: 480px) {
     height: 50px;
+  }
+`;
+
+export const SiteNameContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const Icon = styled.img`
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+
+  @media (max-width: 768px) {
+    width: 25px;
+    height: 25px;
+  }
+
+  @media (max-width: 480px) {
+    width: 20px;
+    height: 20px;
   }
 `;
 
@@ -138,7 +159,7 @@ export const MobileMenu = styled.div`
   position: absolute;
   top: 60px;
   right: 0;
-  background-color: #253F83;
+  background-color: #1F387A;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   z-index: 1000;
@@ -173,7 +194,7 @@ export const DropdownMenu = styled.div`
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #253F83;
+  background-color: #1F387A;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   border-radius: 8px;

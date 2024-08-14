@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 import * as S from './Header.styled';
+import cowTitleIcon from '../../assets/cow_title.svg';
 
 const Header = () => {
   const user = useContext(UserContext);
@@ -29,17 +30,27 @@ const Header = () => {
     <S.Header>
       <S.Contents>
         <S.Logo href="/">
-          <S.SiteName>CW:COWWELL</S.SiteName>
+          <S.SiteNameContainer>
+            <S.Icon src={cowTitleIcon} alt="Cow Title Icon" />
+            <S.SiteName>COWWELL</S.SiteName>
+          </S.SiteNameContainer>
         </S.Logo>
         <S.Navigation>
           <S.MenuIcon onClick={toggleMenu} />
           {menuOpen && (
             <S.MobileMenu>
               <S.MobileMenuItem href="/">Home</S.MobileMenuItem>
-              <S.MobileMenuItem href="/board">Board</S.MobileMenuItem>
-              <S.MobileMenuItem onClick={handleGetStartedClick}>
-                {user ? `${user.name} Account` : 'Login'}
-              </S.MobileMenuItem>
+              {!user ? (
+                <S.MobileMenuItem onClick={handleGetStartedClick}>Login</S.MobileMenuItem>
+              ) : (
+                <>
+                  <S.MobileMenuItem href="/board">Board</S.MobileMenuItem>
+                  <S.MobileMenuItem href="/history">History</S.MobileMenuItem>
+                  <S.MobileMenuItem onClick={handleGetStartedClick}>
+                    {`${user.name} Account`}
+                  </S.MobileMenuItem>
+                </>
+              )}
             </S.MobileMenu>
           )}
           <S.DesktopMenu>
@@ -56,9 +67,16 @@ const Header = () => {
                   </S.DropdownMenu>
                 )}
               </li>
-              <li>
-                <S.NavLink href="/board">Board</S.NavLink>
-              </li>
+              {user && (
+                <>
+                  <li>
+                    <S.NavLink href="/board">Board</S.NavLink>
+                  </li>
+                  <li>
+                    <S.NavLink href="/history">History</S.NavLink>
+                  </li>
+                </>
+              )}
             </ul>
             <S.GetStartedButton onClick={handleGetStartedClick}>
               {user ? `${user.name} Account` : 'Login'}

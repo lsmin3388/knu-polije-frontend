@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   padding: 20px;
   padding-top: 70px;
-  background-color: #253F83;
+  background-color: #1F387A;
   font-family: Arial, sans-serif;
   min-height: 100vh;
   height: auto;

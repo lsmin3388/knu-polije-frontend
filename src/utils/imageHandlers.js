@@ -1,3 +1,5 @@
+import axios from '../api/axios';
+
 export const handleImageChange = (event, setSelectedImage) => {
   const file = event.target.files[0];
   if (file) {
@@ -7,7 +9,7 @@ export const handleImageChange = (event, setSelectedImage) => {
   }
 };
 
-export const handleDetect = async (type, selectedImage, setResultImage, setResultText) => {
+export const handleDetect = async (type, selectedImage, setResultImage, setResultText, useTestMode) => {
   if (!selectedImage) return;
 
   const formData = new FormData();
@@ -21,11 +23,12 @@ export const handleDetect = async (type, selectedImage, setResultImage, setResul
   }
 
   try {
-    const response = await fetch(`/api/v1/detects/${type}`, {
-      method: 'POST',
-      body: formData,
+    const response = await axios.post(`/detects/${type}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
-    const data = await response.json();
+    const data = response.data;
     console.log('Response:', data);
 
     if (data.status !== 200 || !data.response) {
@@ -46,12 +49,14 @@ export const handleDetect = async (type, selectedImage, setResultImage, setResul
 
     if (type === 'breed') {
       setResultText(`Breed: ${data.response.result.results[0].label}`);
-    } else if (type === 'weight') {
-      setResultText(`Total Weight: ${data.response.result.total_weight}`);
+    } else if (type === 'weight' || type === 'miniature_weight') {
+      const roundedWeight = Math.round(data.response.result.total_weight);
+      const unit = useTestMode ? 'g' : 'kg';
+      setResultText(`Total Weight: ${roundedWeight} ${unit}`);
     }
   } catch (error) {
     console.error('Error detecting image:', error);
     setResultText(error.message);
-    setResultImage(null);  // 이미지가 없으면 에러 메시지가 제대로 표시되도록 함
+    setResultImage(null);
   }
 };

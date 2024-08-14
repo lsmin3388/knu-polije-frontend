@@ -8,7 +8,7 @@ import ResultCowIcon from '../../assets/result_cow.svg';
 import ResultTextCowIcon from '../../assets/result_text_cow.svg';
 
 const ResultPanel = memo(({ resultImage, resultText, isError, resetResult }) => (
-  <S.RightPanel resultExists={!!resultImage || !!resultText}>
+  <S.RightPanel resultExists={!!resultImage || !!resultText || isError}>
     {isError ? (
       <S.ResultTextMessage isError={isError}>
         {resultText}
@@ -17,7 +17,7 @@ const ResultPanel = memo(({ resultImage, resultText, isError, resetResult }) => 
       <>
         <S.ResultIcon src={ResultCowIcon} alt="Result Icon" />
         <S.ResultTextMessage>
-          If you want to see result, add materials first!
+          Add materials to see the result!
         </S.ResultTextMessage>
       </>
     ) : (
@@ -85,12 +85,12 @@ const Dashboard = () => {
       setResultText("Error capturing image from webcam. Please try again.");
       return;
     }
-
+  
     try {
       if (type === 'weight' && useTestMode) {
-        await handleDetect('miniature_weight', imageToDetect, setResultImage, setResultText);
+        await handleDetect('miniature_weight', imageToDetect, setResultImage, setResultText, useTestMode);
       } else {
-        await handleDetect(type, imageToDetect, setResultImage, setResultText);
+        await handleDetect(type, imageToDetect, setResultImage, setResultText, useTestMode);
       }
     } catch (error) {
       console.error("Error during detection:", error);

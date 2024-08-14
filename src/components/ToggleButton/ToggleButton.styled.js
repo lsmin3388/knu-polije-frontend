@@ -38,7 +38,7 @@ export const ToggleInput = styled.input`
   width: 0;
   height: 0;
   &:checked + span {
-    background-color: #253F83;
+    background-color: #1F387A;
   }
   &:checked + span:before {
     transform: translateX(0px);
@@ -53,7 +53,7 @@ export const ToggleSlider = styled.span`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #253F83;
+  background-color: #1F387A;
   color: #fff;
   transition: .4s;
   border-radius: 34px;

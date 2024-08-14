@@ -1,7 +1,7 @@
-// routes.js
 import HomeBody from './components/HomeBody/HomeBody';
 import Dashboard from './components/Dashboard/Dashboard';
 import ProtectedRoute from './router/ProtectedRoute';
+import History from './components/History/History';
 
 const routes = [
   {
@@ -13,6 +13,14 @@ const routes = [
     element: (
       <ProtectedRoute>
         <Dashboard />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/history',
+    element: (
+      <ProtectedRoute>
+        <History />
       </ProtectedRoute>
     ),
   },
