@@ -1,28 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import axios from '../api/axios';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
 const ProtectedRoute = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const user = useContext(UserContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await axios.get('/member');
-        if (response.status === 200) {
-          setIsAuthenticated(true);
-        } else {
-          navigate('/oauth2/authorization/google');
-        }
-      } catch (error) {
-        navigate('/oauth2/authorization/google');
-      }
-    };
-    checkAuth();
-  }, [navigate]);
-
-  if (!isAuthenticated) {
+  if (!user) {
+    navigate('/oauth2/authorization/google');
     return null;
   }
 

@@ -25,9 +25,7 @@ const App = () => {
   return (
     <UserContext.Provider value={user}>
       <Header />
-
       <AppRouter />
-      
       <Footer />
     </UserContext.Provider>
   );
