@@ -61,7 +61,7 @@ const HomeBody = () => {
                 <span style={{ color: '#EDBCE9', fontSize: '1.0em', marginLeft: '5px' }}>L</span>earning
               </h3>
               <p>
-              Cattle farmers struggle with the inefficiency and stress of manual livestock monitoring, which can affect animal health. CW:COWWELL offers an automated solution using IoT, AI, and web applications to improve cattle management. The system employs the YOLOv7 deep learning method for precise image processing and cattle identification, enhancing the monitoring of cattle weight and types.
+              Cattle farmers struggle with the inefficiency and stress of manual livestock monitoring. CW:COWWELL offers an automated solution using AI, and web applications to improve cattle management. The system employs the YOLOv7 deep learning method for image processing and cattle identification, enhancing the monitoring of cattle weight and types.
               </p>
               <S.Buttons>
                 <Link to="about" smooth={true} duration={500}>
