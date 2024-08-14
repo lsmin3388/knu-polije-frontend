@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const axios = axios.create({
+const instance = axios.create({
   baseURL: 'https://kpcowell.site/api/v1',
   timeout: 20000,
   withCredentials: true,
@@ -9,4 +9,4 @@ const axios = axios.create({
   },
 });
 
-export default axios;
+export default instance;
