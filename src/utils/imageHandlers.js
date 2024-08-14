@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../api/axios';
 
 export const handleImageChange = (event, setSelectedImage) => {
   const file = event.target.files[0];
