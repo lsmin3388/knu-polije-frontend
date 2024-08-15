@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './HomeBody.styled';
 import cowImage from '../../assets/images/cow.png';
@@ -17,6 +17,7 @@ import aboutImage3 from '../../assets/images/AboutImage3.png';
 import logos from '../../assets/images/logos.png';
 import instaIcon from '../../assets/insta.svg';
 import { Link } from 'react-scroll';
+import { UserContext } from '../../context/UserContext';
 
 const membersLecturers = [
   { name: 'Wahyu Pebrianto, S.Tr.Kom., M.T.', role: 'Project Advisor', image: lecturer, instagram: 'https://instagram.com/wahyu_faith' },
@@ -38,9 +39,14 @@ const membersKNU = [
 
 const HomeBody = () => {
   const navigate = useNavigate();
+  const user = useContext(UserContext);
 
   const handleGetStartedClick = () => {
-    navigate('/board');
+    if (!user) {
+      window.location.href = '/oauth2/authorization/google';
+    } else {
+      navigate('/board');
+    }
   };
 
   return (
